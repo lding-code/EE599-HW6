@@ -275,3 +275,58 @@ TEST(MazeShould6, ReturnMaze6) {
 
     EXPECT_EQ(expected, actual);
 }
+
+// Q5 case 7:
+TEST(MazeShould7, ReturnMaze7) {
+    std::vector<std::vector<int>> maze = {
+        {1, 1, 0, 1},
+        {0, 1, 1, 1},
+        {1, 0, 0, 1},
+        {1, 1, 1, 1},
+    };
+
+    Graph g;
+    std::vector<int> start = {0, 0};
+    std::vector<int> end = {0, 3};
+
+    bool actual = g.mazeHasPath(maze, start, end);
+    bool expected = true;
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q6 case 1:
+TEST(RearrangeShould1, ReturnRearrange1) {
+    Solution solution;
+
+    std::vector<int> v = {9, 7, 5, 11, 12, 2, 14, 3, 10, 6};
+
+    std::vector<int> actual = solution.rearrange(v, 9);
+    std::vector<int> expected = {5, 2, 3, 6, 9, 7, 11, 12, 14, 10};
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q6 case 2:
+TEST(RearrangeShould2, ReturnRearrange2) {
+    Solution solution;
+
+    std::vector<int> v = {35, 77, 65, 2, 34, 75, 63, 72, 89, 6};
+
+    std::vector<int> actual = solution.rearrange(v, 0);
+    std::vector<int> expected = {2, 34, 6, 35, 77, 65, 75, 63, 72, 89};
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q6 case 3: repeated elements
+TEST(RearrangeShould3, ReturnRearrange3) {
+    Solution solution;
+
+    std::vector<int> v = {9, 10, 2, 7, 3, 3, 2, 10, 9, 1, 4};
+
+    std::vector<int> actual = solution.rearrange(v, 4);
+    std::vector<int> expected = {2, 2, 1, 3, 3, 9, 10, 7, 10, 9, 4};
+
+    EXPECT_EQ(expected, actual);
+}

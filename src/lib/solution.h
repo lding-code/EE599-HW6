@@ -10,6 +10,7 @@ class Solution {
 
 public:
     std::string HelloWorld();
+    std::vector<int> rearrange(std::vector<int> &v, int i);
 };
 
 class Graph {

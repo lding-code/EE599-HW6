@@ -9,6 +9,27 @@ std::string Solution::HelloWorld() {
     return "HelloWorld";
 }
 
+std::vector<int> Solution::rearrange(std::vector<int> &v, int i) {
+    int target = v[i];
+    std::vector<int> rtn{};
+    for (auto it = v.begin();it != v.end(); it++) {
+        if (*it < target) {
+            rtn.push_back(*it);
+        }
+    }
+    for (auto it = v.begin();it != v.end(); it++) {
+        if (*it == target) {
+            rtn.push_back(*it);
+        }
+    }
+    for (auto it = v.begin();it != v.end(); it++) {
+        if (*it > target) {
+            rtn.push_back(*it);
+        }
+    }
+    return rtn;
+}
+
 std::vector<int> Graph::DFS(int root) {
 
     std::stack<int> verStack({root});
