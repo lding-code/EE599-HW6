@@ -173,8 +173,6 @@ TEST(MazeShould1, ReturnMaze1) {
         {1, 1, 1, 1, 1}
     };
 
-    std::cout << "maze.size() = " << std::to_string(maze.size()) << std::endl;
-
     Graph g;
     std::vector<int> start = {0, 0};
     std::vector<int> end = {4, 4};
@@ -195,14 +193,85 @@ TEST(MazeShould2, ReturnMaze2) {
         {1, 1, 1, 1, 1}
     };
 
-    std::cout << "maze.size() = " << std::to_string(maze.size()) << std::endl;
-
     Graph g;
-    std::vector<int> start = {0, 0};
+    std::vector<int> start = {1, 2};
     std::vector<int> end = {4, 4};
 
     bool actual = g.mazeHasPath(maze, start, end);
     bool expected = false;
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q5 case 3:
+TEST(MazeShould3, ReturnMaze3) {
+    std::vector<std::vector<int>> maze = {
+        {1, 0, 0},
+        {0, 0, 0},
+        {0, 0, 1}
+    };
+
+    Graph g;
+    std::vector<int> start = {0, 0};
+    std::vector<int> end = {2, 2};
+
+    bool actual = g.mazeHasPath(maze, start, end);
+    bool expected = false;
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q5 case 4:
+TEST(MazeShould4, ReturnMaze4) {
+    std::vector<std::vector<int>> maze = {
+        {1, 0, 0},
+        {0, 1, 0},
+        {0, 0, 1}
+    };
+
+    Graph g;
+    std::vector<int> start = {0, 0};
+    std::vector<int> end = {2, 2};
+
+    bool actual = g.mazeHasPath(maze, start, end);
+    bool expected = false;
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q5 case 5:
+TEST(MazeShould5, ReturnMaze5) {
+    std::vector<std::vector<int>> maze = {
+        {1, 1, 1},
+        {1, 1, 1},
+        {1, 1, 1}
+    };
+
+    Graph g;
+    std::vector<int> start = {0, 0};
+    std::vector<int> end = {2, 2};
+
+    bool actual = g.mazeHasPath(maze, start, end);
+    bool expected = true;
+
+    EXPECT_EQ(expected, actual);
+}
+
+// Q5 case 6:
+TEST(MazeShould6, ReturnMaze6) {
+    std::vector<std::vector<int>> maze = {
+        {1, 1, 0, 1},
+        {0, 1, 1, 1},
+        {1, 0, 0, 1},
+        {1, 1, 1, 1},
+    };
+
+    Graph g;
+    std::vector<int> start = {0, 0};
+    std::vector<int> end = {0, 3};
+
+    bool actual = g.mazeHasPath(maze, start, end);
+    bool expected = true;
 
     EXPECT_EQ(expected, actual);
 }
