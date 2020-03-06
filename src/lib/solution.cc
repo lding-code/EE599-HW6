@@ -10,6 +10,7 @@ std::string Solution::HelloWorld() {
 }
 
 std::vector<int> Graph::DFS(int root) {
+
     std::stack<int> verStack({root});
     std::set<int> visited;
     std::vector<int> rtnVec;
@@ -18,7 +19,6 @@ std::vector<int> Graph::DFS(int root) {
         std::set<int> topEdge(v_[verStack.top()]);
         bool allVisited = true;
 
-        std::cout << "now at vertex " << std::to_string(verStack.top()) << std::endl;
         // if current vertex is not visited before: (push it to return vector and insert to visited)
         if (visited.find(verStack.top()) == visited.end()) {
             // push to return vector
@@ -59,7 +59,6 @@ std::vector<int> Graph::DFS_ALL() {
             std::set<int> topEdge(v_[verStack.top()]);
             bool allVisited = true;
 
-            std::cout << "now at vertex " << std::to_string(verStack.top()) << std::endl;
             // if current vertex is not visited before: (push it to return vector and insert to visited)
             if (visited.find(verStack.top()) == visited.end()) {
                 // push to return vector
@@ -87,6 +86,61 @@ std::vector<int> Graph::DFS_ALL() {
             }
         }
     }
-
     return rtnVec;
+}
+
+
+bool Graph::mazeHasPath(std::vector<std::vector<int>> &maze, std::vector<int> start, std::vector<int>end) {
+
+    // convert 2D vector to connected graph
+    int rowSize = maze.size();
+    int colSize = maze[0].size();
+    for (int row = 0; row < rowSize; row++) {
+        for (int col = 0; col < colSize; col++) {
+            // if current cell is 1 -> valid vertex
+            if (maze[row][col] == 1) {
+                v_.insert(std::pair<int, std::set<int>>(row * colSize + col, {}));
+                int ver = row * colSize + col;
+                // if not on top -> possible to connect to top cell if it's also 1
+                if (row != 0) {
+                    if (maze[row - 1][col] == 1) {
+                        v_[ver].insert((row-1) * colSize + col);
+                    }
+                }
+                // if not on left edge -> possible to connect to left cell if it's also 1
+                if (col != 0) {
+                    if (maze[row][col - 1] == 1) {
+                        v_[ver].insert(row * colSize + (col - 1));
+                    }
+                }
+                // if not on bottom -> possible to connect to bottom cell if it's also 1
+                if (row != rowSize - 1) {
+                    if (maze[row + 1][col] == 1) {
+                        v_[ver].insert((row + 1) * colSize + col);
+                    }
+                }
+                // if not on right edge -> possible to connect to right cell if it's also 1
+                if (col != colSize - 1) {
+                    if (maze[row][col + 1] == 1) {
+                        v_[ver].insert(row * colSize + (col + 1));
+                    }
+                }
+            }
+        }
+    }
+
+    // get start and end point
+    int startVer = start[0] * colSize + start[1];
+    int endVer = end[0] * colSize + end[1];
+
+    // traverse all from start point
+    std::vector<int> reachableVer = DFS(startVer);
+
+    // find if end vertex exists in the traverse vector
+    for (auto it = reachableVer.begin(); it != reachableVer.end(); it++) {
+        if (*it == endVer) {
+            return true;
+        }
+    }
+    return false;
 }

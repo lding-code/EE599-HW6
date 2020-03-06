@@ -21,7 +21,16 @@ Q2.
 
 Q3.
 Implemented in the solution source file as DFS method of class Graph.
-Tested in GTest
-Runtime = O(V+E) because all vertices and edges are visited for once
+Tested in GTest.
+Runtime = O(V+E) because all vertices and edges are visited for once.
 
 Q4.
+Implemented in the solution source file as DFS_ALL of class Graph.
+My algorithm always tries to visit edges with lowest value possible. Therefore, the output with example input from question 4 would be:
+[0, 1, 2, 3, 4, 6, 5]
+because at vertex 1, it will try to traverse from 2 to 3 where 2 is visited first. Although the order is different, this is still a DFS algorithm as it tries to visit next connected vertex (child of child in tree terminology) before it visit all connected vertices of the current vertex. It goes deep isteand of broad.
+
+Tedted in GTest.
+Runtime = O(V+E) because all vertices and edges are visited for once.
+
+Q5
